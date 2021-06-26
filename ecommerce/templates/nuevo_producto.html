@@ -1,0 +1,13 @@
+{%extends "layout.html"%}
+{% block body %}
+<div class="container mt-5 mb-5">
+    <form action="{% url 'nuevo_producto' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <br>
+        <hr>
+        <input type="submit" class="btn btn-primary" value="Guardar">
+    </form>
+
+</div>
+{% endblock %}

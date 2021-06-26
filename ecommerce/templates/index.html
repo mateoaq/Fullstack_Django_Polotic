@@ -1,0 +1,42 @@
+{%extends "layout.html"%}
+{% block body %}
+<div class="cuerpo-inicio mt-5">
+    <div class="principales container">
+        <div class="card-group">
+            {% for producto in principales  %}
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" style=" height: 180px;
+                object-fit: contain;" src="{{producto.imagen.url}}" alt="{{producto.titulo}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{producto.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{producto.categoria}}</h6>
+                    <p class="card-text">{{producto.descripcion}}</p>
+                    <a href="{%url 'product' producto.id %}" class="btn btn-primary">Ver Más</a>
+                </div>
+            </div>
+
+
+            {% empty %}
+            <p>No hay productos cargados! :(</p>
+            {%endfor%}
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+        <h3 class="text-center">Más Productos</h3>
+        {% for producto in productos %}
+        <ul>
+            <li style="list-style: none;"><a href="{%url 'product' producto.id %}">
+                    <h2>{{producto.titulo}}</h2>
+                    <p>{{producto.descripcion}}</p>
+                </a>
+            </li>
+        </ul>
+        {% empty %}
+        <p>No hay más productos cargados! :(</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

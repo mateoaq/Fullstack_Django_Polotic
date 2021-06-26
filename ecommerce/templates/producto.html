@@ -1,0 +1,25 @@
+{%extends "layout.html"%}
+{% block body %}
+<div class="container mb-5 mt-5">
+    <div class="card mb-3">
+        <img class="card-img-top" style=" height: 300px;
+        object-fit: contain;" src="{{producto.imagen.url}}" alt="{{producto.titulo}}">
+        <div class="card-body">
+            <h5 class="card-title">{{producto.titulo}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{producto.categoria}}</h6>
+            <p class="card-text">{{producto.descripcion}}</p>
+            <p class="card-text"><b>${{producto.precio}}</b></p>
+        </div>
+    </div>
+
+    {% if user.is_superuser %}
+    <a href="{% url 'eliminar_producto' producto.id %}"><button type="button" class="btn btn-danger">Borrar</button></a>
+    <a href="{% url 'editar_producto' producto.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
+    {% else %}
+    <a href="{% url 'carrito_add' producto.id %}"> <button type="button" class="btn btn-primary">Agregar al
+            carrito</button></a>
+    {% endif %}
+</div>
+
+
+{% endblock %}

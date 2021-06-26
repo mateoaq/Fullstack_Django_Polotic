@@ -1,0 +1,54 @@
+{%extends "layout.html"%}
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="carrito">
+        <h3>Carrito de {{user}}</h3>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Quitar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for values in carrito.carrito.values  %}
+                <tr>
+                    <th scope="row"> <a href="{% url 'product' values.producto_id%}">{{values.producto_id}}</a></th>
+                    <td>{{values.titulo}}</td>
+                    <td>${{values.precio}}</td>
+                    <td> <a href="{% url 'carrito_decre' values.producto_id %}"> <button type="button"
+                                class="btn btn-secondary p-1"> - </button></a>
+                        {{values.cantidad}} <a href="{% url 'carrito_add' values.producto_id %}"> <button type="button"
+                                class=" p-1 btn btn-secondary"> +
+                            </button></a>
+                    </td>
+                    <td>${{values.subtotal}}</td>
+                    <td><a href="{% url 'carrito_del' values.producto_id%}"><button type="button"
+                                class="btn btn-danger">X</button></a></td>
+                </tr>
+                {% endfor %}
+                <tr class="table-active">
+                    <th scope="row" colspan="4">
+                        Total
+                    </th>
+                    <td>
+                        <b>${{total}}</b>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{% url 'carrito_clear'%}"><button type="button" class="btn btn-warning"> Vaciar Carrito</button></a>
+        <a href="#"><button type="button" class="btn btn-primary"> Finalizar compra</button></a>
+
+    </div>
+</div>
+{% endblock %}
